@@ -3,133 +3,451 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shourov Das</title>
+<title>Neon Subway Runner</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f0fff0;
+
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* Header */
-.header {
-    background: #2ecc71;
-    color: white;
-    text-align: center;
-    padding: 40px 20px;
+body{
+    overflow:hidden;
+    font-family:Arial, sans-serif;
+    background:#120028;
 }
 
-.header img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 4px solid white;
-    object-fit: cover;
+/* SCORE */
+
+#score{
+    position:absolute;
+    top:20px;
+    right:20px;
+    color:white;
+    font-size:32px;
+    font-weight:bold;
+    z-index:999;
 }
 
-.nav {
-    background: #27ae60;
-    text-align: center;
-    padding: 10px;
+/* GAME AREA */
+
+.game{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+    background:linear-gradient(to bottom,#2b1055,#7597de);
 }
 
-.nav a {
-    color: white;
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight: bold;
+/* CITY BACKGROUND */
+
+.city{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:
+    repeating-linear-gradient(
+        to right,
+        rgba(255,255,255,0.05) 0px,
+        rgba(255,255,255,0.05) 3px,
+        transparent 3px,
+        transparent 120px
+    );
 }
 
-.container {
-    width: 80%;
-    margin: 20px auto;
+/* LANES */
+
+.lane{
+    position:absolute;
+    width:33.33%;
+    height:100%;
+    border-left:2px solid rgba(255,255,255,0.15);
+    border-right:2px solid rgba(255,255,255,0.15);
 }
 
-.card {
-    background: white;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-left: 5px solid #2ecc71;
-    border-radius: 5px;
+.left{
+    left:0;
 }
 
-h2 {
-    color: #27ae60;
+.center{
+    left:33.33%;
 }
 
-.footer {
-    background: #2ecc71;
-    color: white;
-    text-align: center;
-    padding: 10px;
+.right{
+    left:66.66%;
 }
 
-.social a {
-    color: #27ae60;
-    text-decoration: none;
-    font-weight: bold;
+/* PLAYER */
+
+#player{
+    position:absolute;
+    width:70px;
+    height:90px;
+    background:linear-gradient(#00e5ff,#00b0ff);
+    border-radius:15px;
+    bottom:120px;
+    left:50%;
+    transform:translateX(-50%);
+    box-shadow:0 0 25px #00e5ff;
+    z-index:100;
 }
+
+/* OBSTACLES */
+
+.obstacle{
+    position:absolute;
+    width:80px;
+    height:80px;
+    background:linear-gradient(#ff1744,#d50000);
+    border-radius:12px;
+    box-shadow:0 0 20px #ff1744;
+}
+
+/* COINS */
+
+.coin{
+    position:absolute;
+    width:40px;
+    height:40px;
+    background:gold;
+    border-radius:50%;
+    box-shadow:0 0 20px yellow;
+}
+
+/* CONTROLS */
+
+.controls{
+    position:absolute;
+    bottom:25px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    z-index:999;
+}
+
+.controls button{
+    width:70px;
+    height:70px;
+    border:none;
+    border-radius:50%;
+    font-size:28px;
+    background:rgba(255,255,255,0.15);
+    color:white;
+    backdrop-filter:blur(5px);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    #player{
+        width:60px;
+        height:80px;
+    }
+
+    .obstacle{
+        width:65px;
+        height:65px;
+    }
+
+}
+
 </style>
-
 </head>
 
 <body>
 
-<!-- Header -->
-<div class="header">
-    <img src="cat.jpg" alt="Profile">
-    <h1>Shourov Das</h1>
-    <p>Welcome to my personal website</p>
-</div>
+<div id="score">Score: 0</div>
 
-<!-- Navigation -->
-<div class="nav">
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-</div>
+<div class="game">
 
-<!-- Content -->
-<div class="container">
+    <div class="city"></div>
 
-    <div id="about" class="card">
-        <h2>About Me</h2>
-        <p>Hello! My name is Shourov Das. I love coding and creative design.</p>
-    </div>
+    <div class="lane left"></div>
+    <div class="lane center"></div>
+    <div class="lane right"></div>
 
-    <div id="skills" class="card">
-        <h2>Skills</h2>
-        <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-        </ul>
-    </div>
-
-    <div id="projects" class="card">
-        <h2>Projects</h2>
-        <p>Coming soon...</p>
-    </div>
-
-    <div id="contact" class="card">
-        <h2>Contact</h2>
-        <p>Email: shourovdas456@gmail.com</p>
-        <p>
-            Facebook:
-            <a href="https://www.facebook.com/shourov.das.649318?mibextid=wwXIfr" target="_blank">
-                Visit Profile
-            </a>
-        </p>
-    </div>
+    <div id="player"></div>
 
 </div>
 
-<!-- Footer -->
-<div class="footer">
-    <p>© 2026 Shourov Das</p>
+<!-- MOBILE CONTROLS -->
+
+<div class="controls">
+    <button onclick="moveLeft()">⬅️</button>
+    <button onclick="jump()">⬆️</button>
+    <button onclick="moveRight()">➡️</button>
 </div>
+
+<script>
+
+const player = document.getElementById("player");
+const game = document.querySelector(".game");
+const scoreText = document.getElementById("score");
+
+let lane = 1;
+let jumping = false;
+
+let score = 0;
+let gameSpeed = 7;
+
+const lanes = [
+    "16%",
+    "50%",
+    "83%"
+];
+
+/* PLAYER POSITION */
+
+function updatePlayerPosition(){
+    player.style.left = lanes[lane];
+}
+
+updatePlayerPosition();
+
+/* MOVE LEFT */
+
+function moveLeft(){
+
+    if(lane > 0){
+
+        lane--;
+        updatePlayerPosition();
+
+    }
+
+}
+
+/* MOVE RIGHT */
+
+function moveRight(){
+
+    if(lane < 2){
+
+        lane++;
+        updatePlayerPosition();
+
+    }
+
+}
+
+/* JUMP */
+
+function jump(){
+
+    if(jumping) return;
+
+    jumping = true;
+
+    let height = 120;
+    let up = true;
+
+    const jumpInterval = setInterval(() => {
+
+        if(up){
+
+            height += 12;
+
+            if(height >= 280){
+
+                up = false;
+
+            }
+
+        }else{
+
+            height -= 12;
+
+            if(height <= 120){
+
+                clearInterval(jumpInterval);
+                jumping = false;
+
+            }
+
+        }
+
+        player.style.bottom = height + "px";
+
+    },20);
+
+}
+
+/* KEYBOARD CONTROLS */
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.key === "ArrowLeft"){
+
+        moveLeft();
+
+    }
+
+    if(e.key === "ArrowRight"){
+
+        moveRight();
+
+    }
+
+    if(e.key === "ArrowUp"){
+
+        jump();
+
+    }
+
+});
+
+/* CREATE OBSTACLES */
+
+function createObstacle(){
+
+    const obstacle = document.createElement("div");
+
+    obstacle.classList.add("obstacle");
+
+    const obstacleLane = Math.floor(Math.random()*3);
+
+    obstacle.style.left = lanes[obstacleLane];
+
+    obstacle.style.top = "-100px";
+
+    game.appendChild(obstacle);
+
+    let obstacleTop = -100;
+
+    const obstacleMove = setInterval(()=>{
+
+        obstacleTop += gameSpeed;
+
+        obstacle.style.top = obstacleTop + "px";
+
+        const playerRect = player.getBoundingClientRect();
+        const obstacleRect = obstacle.getBoundingClientRect();
+
+        /* COLLISION */
+
+        if(
+
+            obstacleRect.bottom > playerRect.top &&
+            obstacleRect.top < playerRect.bottom &&
+            obstacleRect.left < playerRect.right &&
+            obstacleRect.right > playerRect.left &&
+            !jumping
+
+        ){
+
+            gameOver();
+
+        }
+
+        /* REMOVE */
+
+        if(obstacleTop > window.innerHeight){
+
+            clearInterval(obstacleMove);
+
+            obstacle.remove();
+
+            score++;
+
+            scoreText.innerHTML = "Score: " + score;
+
+            if(score % 5 === 0){
+
+                gameSpeed += 0.5;
+
+            }
+
+        }
+
+    },20);
+
+}
+
+/* CREATE COINS */
+
+function createCoin(){
+
+    const coin = document.createElement("div");
+
+    coin.classList.add("coin");
+
+    const coinLane = Math.floor(Math.random()*3);
+
+    coin.style.left = lanes[coinLane];
+
+    coin.style.top = "-50px";
+
+    game.appendChild(coin);
+
+    let coinTop = -50;
+
+    const coinMove = setInterval(()=>{
+
+        coinTop += gameSpeed;
+
+        coin.style.top = coinTop + "px";
+
+        const playerRect = player.getBoundingClientRect();
+        const coinRect = coin.getBoundingClientRect();
+
+        /* COLLECT */
+
+        if(
+
+            coinRect.bottom > playerRect.top &&
+            coinRect.top < playerRect.bottom &&
+            coinRect.left < playerRect.right &&
+            coinRect.right > playerRect.left
+
+        ){
+
+            score += 5;
+
+            scoreText.innerHTML = "Score: " + score;
+
+            clearInterval(coinMove);
+
+            coin.remove();
+
+        }
+
+        /* REMOVE */
+
+        if(coinTop > window.innerHeight){
+
+            clearInterval(coinMove);
+
+            coin.remove();
+
+        }
+
+    },20);
+
+}
+
+/* GAME OVER */
+
+function gameOver(){
+
+    alert("GAME OVER\n\nScore: " + score);
+
+    location.reload();
+
+}
+
+/* SPAWN */
+
+setInterval(createObstacle,1400);
+
+setInterval(createCoin,2500);
+
+</script>
 
 </body>
 </html>
